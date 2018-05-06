@@ -7,9 +7,7 @@ int main(){
 	string target;
 	string res = "";
 
-	//cout << "10이상 1000이하의 n 입력" << endl;
 	cin >> n;
-	//cout << endl;
 
 	for (int j = 1; j <= n; j++){
 		target = to_string(j);
@@ -30,5 +28,3 @@ int main(){
 	}
 	return 0;
 }
-
-// 처음에 fail했는데 이유가 scan 받고 cout<<endl; 때문이었음..ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
