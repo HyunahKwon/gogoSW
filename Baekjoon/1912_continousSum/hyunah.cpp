@@ -9,7 +9,7 @@ int max(int a, int b){
 }
 
 int main(){
-	int n, sum, temp = 0, res;   // temp=max val
+	int n, sum, res;   // temp=max val
 	int arr[100001] = {}; // n(1≤n≤100,000)
 
 	cin >> n;  // 들어올 수의 개수
@@ -18,9 +18,9 @@ int main(){
 	}
 
 	sum = arr[0], res = arr[0];
-	for (int i = 0; i < n; i++){
+	for (int i = 0; i < n - 1; i++){
 		sum = sum + arr[i+1];
-		if (sum < arr[i+1] && arr[i+1] >= 0){
+		if (sum < arr[i+1]){
 			sum = arr[i+1];
 		}
 		res = max(sum, res);
