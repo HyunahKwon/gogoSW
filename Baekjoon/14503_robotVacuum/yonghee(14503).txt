@@ -1,0 +1,110 @@
+#include <iostream>
+#include <vector>
+#include <stack>
+#include <algorithm>
+using namespace std;
+int arr_size;
+int arr[6];
+int input_num, input_change_num; //¹Ù²Ù´Â È½¼ö.
+int current_change_num = 0; //
+int check = 0;
+int MAX = 0;
+
+void selectSort(int arr[]) {
+
+	for (int i = 0; i < arr_size - 1; i++)
+	{
+		MAX = i;
+		for (int j = i + 1; j < arr_size; j++) {
+			if (arr[j] >= arr[MAX]) {
+				MAX = j;
+
+			}
+		}
+		int max_count = 0;
+		for (int j = i; j < arr_size - 1; j++) {
+			if (arr[j] == arr[j + 1] && arr[j] == arr[MAX]) max_count = j; //ÃÖ¼Ò 1
+		}
+
+		int des = 0;
+		if (arr[i] > arr[i + 1])  des++;
+		
+		if (des > 0 && max_count != 0)  swap(arr[i], arr[MAX - 1]);
+		else swap(arr[i], arr[MAX]);
+
+
+		if (i != MAX)	current_change_num++;
+
+		if (current_change_num == input_change_num) {
+			check = 1;
+			break;
+		}
+	}
+
+
+
+}
+
+
+
+
+int main() {
+
+	int test_case;
+	stack<int> temp_stack;
+
+	cin >> test_case;
+	int result_count = 0;
+	while (test_case--) {
+		result_count++;
+		cin >> input_num >> input_change_num;
+		int digit = 0;
+		arr_size = 0;
+		int temp = input_num;
+		int sur;
+		while (1) { //ÀÚ¸´¼ö ±¸ÇÏ°í
+
+			sur = temp % 10;
+			temp_stack.push(sur);
+			temp = temp / 10;
+			if (temp < 1) {
+				break;
+			}
+		}
+		int count = 0;
+		while (!temp_stack.empty()) {
+
+			arr[count] = temp_stack.top();
+			temp_stack.pop();
+			count++;
+		}
+
+		arr_size = count;
+
+		selectSort(arr);
+		//cout << input_change_num<<"/"<<current_change_num << endl;
+		if (input_change_num > current_change_num) {
+			if (current_change_num != input_change_num) {
+				if ((input_change_num - current_change_num) % 2 == 1) { //ÀÌÀü²¨¶û ¹Ù²Û°Å
+					swap(arr[count - 1], arr[count - 2]);	
+				}
+			}
+		}
+
+
+		current_change_num = 0;
+
+		cout << "#" << result_count << "  ";
+
+		for (int i = 0; i < arr_size; i++) {
+			cout << arr[i];
+		}
+		cout << endl;
+	}
+
+
+	system("pause");
+	////////////
+	return 0;
+}
+
