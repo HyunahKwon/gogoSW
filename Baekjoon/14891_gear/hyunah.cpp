@@ -6,6 +6,7 @@ int clock[4];
 
 void rotate(int target, int clockwise);
 int sum();
+void print();
 int main(){
 	// [0]: 12시, [2]: 3시, [6]: 9시 방향
 	char temp;  // swap을 위한 변수
@@ -22,8 +23,9 @@ int main(){
 	
 	while (k != 0){
 		cin >> target >> clockwise;
-		clock[target - 1] = clockwise;
-		
+		memset(clock, 0, sizeof(clock));
+		clock[target - 1] = clockwise;		
+
 		if (target == 1) {
 			for (int i = 0; i <= 2; i++) {
 				if (gear[i][2] != gear[i + 1][6])  //1번 != 2번
@@ -56,9 +58,10 @@ int main(){
 		for (int i = 0; i < 4; i++){
 			rotate(i, clock[i]);
 		}
+
+		//print();
 		k--;
 	}
-
 	cout << sum() << endl;
 
 	return 0;
@@ -69,30 +72,41 @@ void rotate(int target, int clockwise){  // 톱니 회전!
 	if (clockwise == 1){
 	temp = gear[target][7];
 		for (int i = 7; i > 0; i--){
-			gear[target][i + 1] = gear[target][i];
+			gear[target][i] = gear[target][i - 1];
 		}
 	gear[target][0] = temp;
 	}
-	else {
+	else if (clockwise == -1){
 		temp = gear[target][0];
 		for (int i = 0; i < 7; i++){
 			gear[target][i] = gear[target][i + 1];
 		}
 		gear[target][7] = temp;
 	}
+	else
+		return;
 }
 
 int sum(){
 	int sum = 0;
 	
-	if (gear[1][0] == '1')
+	if (gear[0][0] == '1')
 		sum += 1;
-	if (gear[2][0] == '1')
+	if (gear[1][0] == '1')
 		sum += 2;
-	if (gear[3][0] == '1')
+	if (gear[2][0] == '1')
 		sum += 4;
-	if (gear[4][0] == '1')
+	if (gear[3][0] == '1')
 		sum += 8;
 
 	return sum;
+}
+
+void print(){
+	for (int i = 0; i < 4; i++){
+		cout << "gear" << i + 1 << ": ";
+		for (int j = 0; j < 8; j++)
+			cout << gear[i][j];
+		cout << endl;
+	}
 }
