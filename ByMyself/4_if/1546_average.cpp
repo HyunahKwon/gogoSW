@@ -8,7 +8,6 @@ int main() {
 	int n;
 	cin >> n;
 	vector<int> score;
-	score.empty();
 	int temp, max = 0;
 	double sum = 0.0;
 
