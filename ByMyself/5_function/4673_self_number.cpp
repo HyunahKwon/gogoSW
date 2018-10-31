@@ -4,25 +4,36 @@ using namespace std;
 
 #define MAX 10000
 int n[10000];
-int creator;	// creator: 생성자
 
 void self(int i);
 int main() {
-	int i = 1;
 	// 배열 -1로 초기화
-	for (int j = 0; j < 10000; j++)
-		n[j] = -1;
+	for (int i = 0; i < 10000; i++)
+		n[i] = -1;
 
-	while (i <= 10000) {
+	for (int i = 1; i <= 10000; i++) {
 		self(i);
 		if (n[i - 1] == 0) {
 			cout << i << endl;
 		}
-		i++;
 	}
 	return 0;
 }
 
+void self(int i) {
+	if (i > 10000) return;		// 10000보다 크면 끝
+
+	int tmp = i, want = 0;
+	while (tmp > 0) {
+		want += tmp % 10;		// 일의 자리 수 구해서 더하기
+		tmp /= 10;
+	}
+
+	n[i - 1] = n[i - 1] + 1;	// 생성자 개수++
+	self(want + i);
+}
+
+/*
 void self(int i) {
 	if (i / 10 == 0) {		// 한 자리 수(1 ~ 9)
 		n[i - 1] = n[i - 1] + 1;	// 생성자 개수++
@@ -44,3 +55,4 @@ void self(int i) {
 		n[i - 1] = n[i - 1] + 1;
 	}
 }
+*/
