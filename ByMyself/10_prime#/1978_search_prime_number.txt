@@ -1,0 +1,24 @@
+/* 100이하의 n... 소수는 몇 개? */
+#include <iostream>
+using namespace std;
+#define MAX 100
+
+int main() {
+	int tc, ans = 0;
+	cin >> tc;
+
+	while (tc != 0) {
+		int n;
+		cin >> n;
+
+		for (int i = 1; i < n; i++) {
+			if (n % i != 0) {
+				ans++;
+			}
+		}
+		tc--;
+	}
+	cout << ans;
+	
+	return 0;
+}
