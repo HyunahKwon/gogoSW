@@ -1,19 +1,20 @@
 /* 100이하의 n... 소수는 몇 개? */
 #include <iostream>
 using namespace std;
-#define MAX 100
 
 int main() {
-	int tc, ans = 0;
+	int tc;
 	cin >> tc;
+	int ans = tc;
 
 	while (tc != 0) {
 		int n;
 		cin >> n;
-
-		for (int i = 1; i < n; i++) {
-			if (n % i != 0) {
-				ans++;
+		
+		for (int i = 2; i < n; i++) {		// 소수: 약수로 1과 n만 가짐. 1은 소수 아님
+			if (n % i == 0) {
+				ans--;
+				break;
 			}
 		}
 		tc--;
