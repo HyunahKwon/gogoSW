@@ -1,7 +1,7 @@
 /* 베르트랑 공준:n < prime <= 2n 인 prime#가 최소 1개 존재 */
 #include <iostream>
 using namespace std;
-#define MAX 123456 * 2
+#define MAX 123456 * 2 + 1
 
 int main() {
 	int n, prime[MAX];
