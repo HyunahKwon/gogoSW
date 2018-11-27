@@ -14,9 +14,11 @@ int main() {
 		else
 			prime[i] = i;					// 자기 자신 넣기
 	}
-	for (int i = 2; i < MAX && prime[i] != 0; i++) {	// 이미 소수 아니면 건너뛰기
-		for (int j = 2; j < MAX && i*j < MAX; j++) {
-			prime[i*j] = 0;
+	for (int i = 2; i < MAX; i++) {	
+		if (prime[i] != 0) {				// 이미 소수 아니면 건너뛰기
+			for (int j = 2; j < MAX && i*j < MAX; j++) {
+				prime[i*j] = 0;
+			}
 		}
 	}
 
